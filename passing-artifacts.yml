@@ -1,0 +1,30 @@
+name: Share data between jobs
+
+on: [push]
+
+jobs:
+  job_1:
+    name: Create File
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello you
+        run: |
+          echo "Hello World" > hello.txt
+      - name: Upload file
+        uses: actions/upload-artifact@v2
+        with:
+          name: bundle
+          path: hello.txt
+
+  job_2:
+    name: Echo the file
+    needs: job_1
+    runs-on: windows-latest
+    steps:
+      - name: Download the bundle
+        uses: actions/download-artifact@v2
+        with:
+          name: bundle
+      - name: Cat away
+        run: |
+          cat hello.txt
