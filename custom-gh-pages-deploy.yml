@@ -12,10 +12,16 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Copy Markdown Files 📋
+        run: |
+          mkdir build
+          cp *.md build
+        
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: . # The folder the action should deploy.
+          FOLDER: build # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch
+          SINGLE_COMMIT: true 
