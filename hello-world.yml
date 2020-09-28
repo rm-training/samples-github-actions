@@ -15,7 +15,7 @@ jobs:
         run: echo "Hello"
         
   world:
-    container: node:slim
+    runs-on: ubuntu-latest
     steps:  
       - name: ...World
         run: echo "World"
